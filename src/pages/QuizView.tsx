@@ -125,29 +125,29 @@ export default function QuizView() {
         </Link>
         
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 bg-purple-100 rounded-lg">
-            <Brain className="h-6 w-6 text-purple-600" />
+          <div className="p-3 bg-magenta-400 border-2 border-white">
+            <Brain className="h-6 w-6 text-black" />
           </div>
           <div>
-            <p className="text-sm text-gray-600">{module.title} • {lesson.title}</p>
-            <h1 className="text-3xl font-bold text-gray-900">Knowledge Quiz</h1>
+            <p className="arcade-text arcade-text-neon-cyan text-xs">{module.title.toUpperCase()} • {lesson.title.toUpperCase()}</p>
+            <h1 className="arcade-text arcade-text-neon-cyan text-2xl">KNOWLEDGE QUIZ</h1>
           </div>
         </div>
 
         {!showResults && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-blue-700">
-                {Object.keys(selectedAnswers).length} of {questions.length} questions answered
+          <div className="arcade-card arcade-card-cyan p-4">
+            <div className="flex items-center justify-between arcade-text text-xs">
+              <span className="arcade-text-neon-yellow">
+                {Object.keys(selectedAnswers).length} OF {questions.length} ANSWERED
               </span>
               <div className="flex items-center gap-4">
                 {attemptCount > 0 && (
-                  <span className="text-orange-600">
-                    Attempt #{attemptCount + 1} (50% points)
+                  <span className="arcade-text-neon-pink">
+                    ATTEMPT #{attemptCount + 1} (30% PTS)
                   </span>
                 )}
-                <span className="text-blue-600">
-                  Passing score: 70%
+                <span className="arcade-text-neon-green">
+                  PASS: 70%
                 </span>
               </div>
             </div>
@@ -156,7 +156,7 @@ export default function QuizView() {
       </div>
 
       {/* Quiz Content */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+      <div className="arcade-dialog">
         <div className="p-8">
           {isLoadingQuestions ? (
             <div className="flex items-center justify-center py-12">
@@ -172,24 +172,26 @@ export default function QuizView() {
                       <span className="text-sm font-medium text-purple-600">{index + 1}</span>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">
-                        {question.question}
+                      <h3 className="arcade-text arcade-text-neon-yellow mb-4">
+                        {question.question.toUpperCase()}
                       </h3>
                       
                       <div className="space-y-3">
                         {question.options?.map((option, optionIndex) => (
                           <label 
                             key={optionIndex}
-                            className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
+                            className={`quiz-option flex items-center p-4 cursor-pointer ${
+                              selectedAnswers[question.id] === option ? 'selected' : ''
+                            }`}
                           >
                             <input
                               type="radio"
                               name={`question-${question.id}`}
                               value={option}
                               onChange={() => handleAnswerSelect(question.id, option)}
-                              className="w-4 h-4 text-purple-600 focus:ring-purple-500"
+                              className="w-4 h-4 accent-cyan-400 mr-3"
                             />
-                            <span className="ml-3 text-gray-700">{option}</span>
+                            <span className="arcade-text text-xs">{option.toUpperCase()}</span>
                           </label>
                         ))}
                       </div>
@@ -202,78 +204,84 @@ export default function QuizView() {
                 <button
                   onClick={handleSubmitQuiz}
                   disabled={!allQuestionsAnswered}
-                  className="px-8 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="arcade-btn arcade-btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit Quiz
+                  SUBMIT QUIZ
                 </button>
               </div>
             </div>
           ) : (
             /* Results */
             <div className="text-center">
-              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-6 ${
-                score >= lesson.quiz.passingScore ? 'bg-green-100' : 'bg-red-100'
+              <div className={`inline-flex items-center justify-center w-16 h-16 border-4 border-white mb-6 ${
+                score >= 70 ? 'bg-green-400' : 'bg-red-400'
               }`}>
-                {score >= lesson.quiz.passingScore ? (
-                  <Trophy className="h-8 w-8 text-green-600" />
+                {score >= 70 ? (
+                  <Trophy className="h-8 w-8 text-black" />
                 ) : (
-                  <X className="h-8 w-8 text-red-600" />
+                  <X className="h-8 w-8 text-black" />
                 )}
               </div>
               
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                {score >= lesson.quiz.passingScore ? 'Congratulations!' : 'Keep Learning!'}
+              <h2 className={`arcade-text text-2xl mb-4 ${
+                score >= 70 ? 'arcade-text-neon-green' : 'arcade-text-neon-red'
+              }`}>
+                {score >= 70 ? 'MISSION SUCCESS!' : 'MISSION FAILED!'}
               </h2>
               
-              <p className="text-lg text-gray-600 mb-6">
-                You scored {score}% ({questions.filter(q => isQuestionCorrect(q.id)).length}/{questions.length} correct)
+              <p className="arcade-text arcade-text-neon-yellow mb-6">
+                SCORE: {score}% ({questions.filter(q => isQuestionCorrect(q.id)).length}/{questions.length} CORRECT)
               </p>
 
               {score >= 70 && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                  <p className="text-green-800 font-medium">
-                    +{attemptCount === 0 ? score : Math.round(score * 0.3)} EcoPoints earned!
+                <div className="mission-result p-4 mb-6">
+                  <p className="arcade-text arcade-text-neon-green">
+                    +{attemptCount === 0 ? score : Math.round(score * 0.3)} ECOPOINTS EARNED!
                   </p>
                   {attemptCount > 0 && (
-                    <p className="text-orange-700 text-sm mt-1">
-                      Retry attempt - reduced points (30% of score)
+                    <p className="arcade-text arcade-text-neon-red text-xs mt-1">
+                      RETRY PENALTY - 30% POINTS ONLY
                     </p>
                   )}
                 </div>
               )}
 
               {score < 70 && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                  <p className="text-red-800 font-medium">
-                    Score below passing grade (70%). Try again with new questions!
+                <div className="mission-result p-4 mb-6">
+                  <p className="arcade-text arcade-text-neon-red">
+                    MISSION FAILED! MINIMUM 70% REQUIRED. TRY AGAIN!
                   </p>
                 </div>
               )}
 
               {/* Answer Review */}
               <div className="text-left space-y-6 mb-8">
-                <h3 className="text-lg font-semibold text-gray-900">Answer Review</h3>
+                <h3 className="arcade-text arcade-text-neon-cyan text-lg">ANSWER REVIEW</h3>
                 {questions.map((question, index) => (
-                  <div key={question.id} className="border border-gray-200 rounded-lg p-4">
+                  <div key={question.id} className="quiz-review-container p-4">
                     <div className="flex items-start gap-3">
-                      <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
-                        isQuestionCorrect(question.id) ? 'bg-green-100' : 'bg-red-100'
+                      <div className={`flex-shrink-0 w-6 h-6 border-2 border-white flex items-center justify-center ${
+                        isQuestionCorrect(question.id) ? 'bg-green-400' : 'bg-red-400'
                       }`}>
                         {isQuestionCorrect(question.id) ? (
-                          <CheckCircle className="h-4 w-4 text-green-600" />
+                          <CheckCircle className="h-4 w-4 text-black" />
                         ) : (
-                          <X className="h-4 w-4 text-red-600" />
+                          <X className="h-4 w-4 text-black" />
                         )}
                       </div>
                       <div className="flex-1">
-                        <p className="font-medium text-gray-900 mb-2">{question.question}</p>
-                        <p className="text-sm text-gray-600 mb-2">
-                          <span className="font-medium">Your answer:</span> {selectedAnswers[question.id]}
+                        <p className="arcade-text arcade-text-neon-cyan mb-2 text-sm">{question.question.toUpperCase()}</p>
+                        <p className="arcade-text text-xs mb-2">
+                          <span className="arcade-text-neon-yellow">YOUR ANSWER:</span> 
+                          <span className={`ml-2 ${isQuestionCorrect(question.id) ? 'arcade-text-neon-green' : 'arcade-text-neon-red'}`}>
+                            {selectedAnswers[question.id]?.toUpperCase()}
+                          </span>
                         </p>
-                        <p className="text-sm text-gray-600 mb-2">
-                          <span className="font-medium">Correct answer:</span> {question.correctAnswer}
+                        <p className="arcade-text text-xs mb-2">
+                          <span className="arcade-text-neon-yellow">CORRECT ANSWER:</span> 
+                          <span className="arcade-text-neon-green ml-2">{question.correctAnswer?.toUpperCase()}</span>
                         </p>
-                        <p className="text-sm text-gray-700">{question.explanation}</p>
+                        <p className="arcade-text arcade-text-neon-yellow text-xs">{question.explanation?.toUpperCase()}</p>
                       </div>
                     </div>
                   </div>
@@ -284,23 +292,23 @@ export default function QuizView() {
                 {score < 70 && (
                   <button
                     onClick={retryQuiz}
-                    className="flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 transition-colors"
+                    className="arcade-btn-quiz flex items-center gap-2 px-4 py-2 arcade-text text-xs"
                   >
                     <RotateCcw className="h-4 w-4" />
-                    Retry Quiz
+                    RETRY QUIZ
                   </button>
                 )}
                 <Link
                   to={`/lesson/${moduleId}/${lessonId}`}
-                  className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                  className="arcade-btn-status px-4 py-2 arcade-text text-xs"
                 >
-                  Back to Lesson
+                  BACK TO MISSION
                 </Link>
                 <Link
                   to="/dashboard"
-                  className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+                  className="arcade-btn-mission px-4 py-2 arcade-text text-xs"
                 >
-                  Continue Learning
+                  CONTINUE
                 </Link>
               </div>
             </div>

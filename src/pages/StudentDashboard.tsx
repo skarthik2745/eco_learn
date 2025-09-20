@@ -72,88 +72,88 @@ export default function StudentDashboard() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Welcome Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">
-          {greeting}, {user?.name}! 🌍
+      <div className="mb-8 text-center">
+        <h1 className="retro-h1 mb-4">
+          {greeting.toUpperCase()}, {user?.name.toUpperCase()}! 🌍
         </h1>
-        <p className="text-gray-600 mt-2">
-          Ready to make a positive impact on our planet today?
+        <p className="retro-text retro-text-yellow">
+          READY TO SAVE THE PLANET TODAY?
         </p>
       </div>
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div className="retro-card retro-card-red p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">EcoPoints</p>
-              <p className="text-2xl font-bold text-green-600">{userProgress.points.toLocaleString()}</p>
+              <p className="retro-text retro-text-yellow text-xs">ECOPOINTS</p>
+              <p className="retro-h2 text-green-400">{userProgress.points.toLocaleString()}</p>
               <div className="mt-2">
-                <div className="flex justify-between text-xs text-gray-500 mb-1">
-                  <span>Level {userProgress.level}</span>
-                  <span>{nextLevelPoints - userProgress.points} to next</span>
+                <div className="flex justify-between retro-text text-xs retro-text-cyan mb-1">
+                  <span>LV {userProgress.level}</span>
+                  <span>{nextLevelPoints - userProgress.points} TO NEXT</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5">
+                <div className="w-full bg-black border border-white h-2">
                   <div 
-                    className="h-1.5 rounded-full bg-green-500"
+                    className="h-full bg-green-400"
                     style={{ width: `${Math.min(progressToNext, 100)}%` }}
                   ></div>
                 </div>
               </div>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
-              <Star className="h-6 w-6 text-green-600" />
+            <div className="p-3 bg-green-400 border-2 border-white">
+              <Star className="h-6 w-6 text-black" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div className="retro-card p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Current Level</p>
-              <p className="text-2xl font-bold text-blue-600">{userProgress.level}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                {userProgress.level < 5 ? 'Eco Beginner' :
-                 userProgress.level < 10 ? 'Eco Enthusiast' :
-                 userProgress.level < 15 ? 'Eco Warrior' : 'Eco Master'}
+              <p className="retro-text retro-text-yellow text-xs">CURRENT LEVEL</p>
+              <p className="retro-h2 text-cyan-400">{userProgress.level}</p>
+              <p className="retro-text text-xs retro-text-magenta mt-1">
+                {userProgress.level < 5 ? 'ECO ROOKIE' :
+                 userProgress.level < 10 ? 'ECO FIGHTER' :
+                 userProgress.level < 15 ? 'ECO WARRIOR' : 'ECO MASTER'}
               </p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <TrendingUp className="h-6 w-6 text-blue-600" />
+            <div className="p-3 bg-cyan-400 border-2 border-white">
+              <TrendingUp className="h-6 w-6 text-black" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div className="retro-card retro-card-magenta p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Badges Earned</p>
-              <p className="text-2xl font-bold text-purple-600">
+              <p className="retro-text retro-text-yellow text-xs">BADGES EARNED</p>
+              <p className="retro-h2 text-magenta-400">
                 {userProgress.badges.filter(b => b.earned).length}/{userProgress.badges.length}
               </p>
-              <p className="text-xs text-gray-500 mt-1">
-                {Math.round((userProgress.badges.filter(b => b.earned).length / userProgress.badges.length) * 100)}% complete
+              <p className="retro-text text-xs retro-text-green mt-1">
+                {Math.round((userProgress.badges.filter(b => b.earned).length / userProgress.badges.length) * 100)}% COMPLETE
               </p>
             </div>
-            <div className="p-3 bg-purple-100 rounded-lg">
-              <Award className="h-6 w-6 text-purple-600" />
+            <div className="p-3 bg-magenta-400 border-2 border-white">
+              <Award className="h-6 w-6 text-black" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <div className="retro-card retro-card-red p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Lessons Completed</p>
-              <p className="text-2xl font-bold text-orange-600">
+              <p className="retro-text retro-text-yellow text-xs">MISSIONS DONE</p>
+              <p className="retro-h2 text-yellow-400">
                 {completedLessons}
               </p>
-              <p className="text-xs text-gray-500 mt-1">
-                {userProgress.completedChallenges.length} challenges done
+              <p className="retro-text text-xs retro-text-cyan mt-1">
+                {userProgress.completedChallenges.length} CHALLENGES
               </p>
             </div>
-            <div className="p-3 bg-orange-100 rounded-lg">
-              <BookOpen className="h-6 w-6 text-orange-600" />
+            <div className="p-3 bg-yellow-400 border-2 border-white">
+              <BookOpen className="h-6 w-6 text-black" />
             </div>
           </div>
         </div>

@@ -40,17 +40,36 @@ export function useGame() {
 }
 
 const defaultBadges: Badge[] = [
-  { id: 'first-lesson', name: 'First Steps', description: 'Complete your first lesson', icon: '🌱', earned: false },
-  { id: 'quiz-master', name: 'Quiz Master', description: 'Score 100% on 5 quizzes', icon: '🧠', earned: false },
-  { id: 'eco-warrior', name: 'Eco Warrior', description: 'Complete 10 eco-challenges', icon: '🌍', earned: false },
-  { id: 'sustainability-champion', name: 'Sustainability Champion', icon: '🏆', description: 'Master of sustainability principles', earned: false },
-  { id: 'energy-expert', name: 'Energy Expert', icon: '🔋', description: 'Leader in renewable energy', earned: false },
-  { id: 'energy-analyst', name: 'Energy Analyst', icon: '📈', description: 'Expert in energy resource analysis', earned: false },
-  { id: 'climate-defender', name: 'Climate Defender', icon: '🛡️', description: 'Guardian against climate change', earned: false },
-  { id: 'pollution-fighter', name: 'Pollution Fighter', icon: '🛡️', description: 'Defender against environmental pollution', earned: false },
-  { id: 'nature-guardian', name: 'Nature Guardian', icon: '🦋', description: 'Protector of natural ecosystems', earned: false },
-  { id: 'tech-innovator', name: 'Tech Innovator', icon: '💡', description: 'Pioneer in green technology', earned: false },
-  { id: 'lifestyle-champion', name: 'Lifestyle Champion', icon: '🌟', description: 'Leader in sustainable living', earned: false }
+  { id: 'eco-starter', name: 'Eco Starter', description: 'Begin your eco journey', icon: '🌱', earned: false },
+  { id: 'solar-hero', name: 'Solar Hero', description: 'Master solar energy', icon: '🔋', earned: false },
+  { id: 'water-saver', name: 'Water Saver', description: 'Conserve precious water', icon: '💧', earned: false },
+  { id: 'planet-protector', name: 'Planet Protector', description: 'Defend our world', icon: '🌍', earned: false },
+  { id: 'sun-master', name: 'Sun Master', description: 'Harness solar power', icon: '🌞', earned: false },
+  { id: 'recycler', name: 'Recycler', description: 'Master of recycling', icon: '♻️', earned: false },
+  { id: 'green-rider', name: 'Green Rider', description: 'Eco-friendly transport', icon: '🚴', earned: false },
+  { id: 'eco-champion', name: 'Eco Champion', description: 'Ultimate eco warrior', icon: '🏆', earned: false },
+  { id: 'builder-tomorrow', name: 'Builder of Tomorrow', description: 'Shape the future', icon: '🛠️', earned: false },
+  { id: 'seed-planter', name: 'Seed Planter', description: 'Grow new life', icon: '🌱', earned: false },
+  { id: 'tree-guardian', name: 'Tree Guardian', description: 'Protect our forests', icon: '🌳', earned: false },
+  { id: 'eco-warrior', name: 'Eco Warrior', description: 'Fight for nature', icon: '🦸', earned: false },
+  { id: 'energy-saver', name: 'Energy Saver', description: 'Conserve power', icon: '🏅', earned: false },
+  { id: 'zero-waste-pro', name: 'Zero Waste Pro', description: 'Eliminate waste', icon: '🔥', earned: false },
+  { id: 'clean-future-explorer', name: 'Clean Future Explorer', description: 'Explore green tech', icon: '🚀', earned: false },
+  { id: 'power-shifter', name: 'Power Shifter', description: 'Change energy systems', icon: '⚡', earned: false },
+  { id: 'star-recycler', name: 'Star Recycler', description: 'Recycling champion', icon: '🌌', earned: false },
+  { id: 'bright-idea', name: 'Bright Idea', description: 'Innovation master', icon: '💡', earned: false },
+  { id: 'eco-defender', name: 'Eco Defender', description: 'Shield the planet', icon: '🛡️', earned: false },
+  { id: 'planet-royalty', name: 'Planet Royalty', description: 'Rule with green wisdom', icon: '👑', earned: false },
+  { id: 'arcade-eco-legend', name: 'Arcade Eco Legend', description: 'Gaming for the planet', icon: '🎮', earned: false },
+  { id: 'ocean-protector', name: 'Ocean Protector', description: 'Save our seas', icon: '🐢', earned: false },
+  { id: 'bee-friend', name: 'Bee Friend', description: 'Pollinator ally', icon: '🐝', earned: false },
+  { id: 'wildlife-ally', name: 'Wildlife Ally', description: 'Animal protector', icon: '🐘', earned: false },
+  { id: 'farmer-friend', name: 'Farmer Friend', description: 'Sustainable agriculture', icon: '🌾', earned: false },
+  { id: 'green-innovator', name: 'Green Innovator', description: 'Eco-tech pioneer', icon: '🏡', earned: false },
+  { id: 'eco-achiever', name: 'Eco Achiever', description: 'Goal crusher', icon: '🎯', earned: false },
+  { id: 'mission-master', name: 'Mission Master', description: 'Complete all missions', icon: '📜', earned: false },
+  { id: 'eco-hunter', name: 'Eco Hunter', description: 'Seek green solutions', icon: '🏹', earned: false },
+  { id: 'lesson-completer', name: 'Lesson Completer', description: 'Knowledge seeker', icon: '🧩', earned: false }
 ];
 
 export function GameProvider({ children }: { children: React.ReactNode }) {

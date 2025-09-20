@@ -119,48 +119,50 @@ export default function EnhancedLessonView() {
           Back to Modules
         </Link>
         
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <div className="arcade-dialog p-6">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-3xl">{module.icon}</span>
                 <div>
-                  <p className="text-sm text-gray-600 font-medium">{module.title}</p>
-                  <h1 className="text-3xl font-bold text-gray-900">{lesson.title}</h1>
+                  <p className="arcade-text arcade-text-cyan text-xs">{module.title.toUpperCase()}</p>
+                  <h1 className="arcade-h1">{lesson.title.toUpperCase()}</h1>
                 </div>
               </div>
               
-              <p className="text-gray-600 mb-4">{lesson.description}</p>
+              <p className="arcade-text arcade-text-yellow mb-4">{lesson.description.toUpperCase()}</p>
               
-              <div className="flex items-center gap-6 text-sm text-gray-600">
-                <div className="flex items-center">
+              <div className="flex items-center gap-6 arcade-text text-xs">
+                <div className="flex items-center arcade-text-green">
                   <Clock className="h-4 w-4 mr-1" />
-                  {lesson.duration} minutes
+                  {lesson.duration} MIN
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center arcade-text-green">
                   <Award className="h-4 w-4 mr-1" />
-                  {lesson.points} points
+                  {lesson.points} PTS
                 </div>
               </div>
             </div>
             
             {isLessonComplete && (
-              <div className="flex items-center text-green-600 bg-green-50 px-4 py-2 rounded-lg">
-                <CheckCircle className="h-5 w-5 mr-2" />
-                <span className="font-medium">Completed</span>
+              <div className="arcade-card arcade-card-yellow px-4 py-2">
+                <div className="flex items-center">
+                  <CheckCircle className="h-5 w-5 mr-2 text-green-400" />
+                  <span className="arcade-text arcade-text-green">COMPLETE</span>
+                </div>
               </div>
             )}
           </div>
 
           {/* Progress Bar */}
           <div className="mt-6">
-            <div className="flex justify-between text-sm text-gray-600 mb-2">
-              <span>Lesson Progress</span>
-              <span>{Math.round(progressPercentage)}% Complete</span>
+            <div className="flex justify-between arcade-text text-xs arcade-text-yellow mb-2">
+              <span>MISSION PROGRESS</span>
+              <span>{Math.round(progressPercentage)}% COMPLETE</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="arcade-progress">
               <div 
-                className="bg-gradient-to-r from-green-400 to-emerald-500 h-3 rounded-full transition-all duration-300"
+                className="arcade-progress-fill"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
@@ -187,31 +189,37 @@ export default function EnhancedLessonView() {
         ) : (
           <div className="space-y-6">
             {/* Main Content */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+            <div className="arcade-dialog p-8">
               <div 
-                className="prose prose-lg max-w-none"
+                className="arcade-text text-white leading-relaxed"
                 dangerouslySetInnerHTML={{ 
-                  __html: dynamicContent?.content_html || `<h1>${lesson.title}</h1><p>${lesson.description}</p><div>${lesson.content}</div>` 
+                  __html: (dynamicContent?.content_html || `<h1>${lesson.title}</h1><p>${lesson.description}</p><div>${lesson.content}</div>`)
+                    .replace(/<h1[^>]*>/g, '<h1 class="arcade-h1 mb-4">')
+                    .replace(/<h2[^>]*>/g, '<h2 class="arcade-h2 mb-3">')
+                    .replace(/<h3[^>]*>/g, '<h3 class="arcade-h3 mb-2">')
+                    .replace(/<p[^>]*>/g, '<p class="arcade-text text-white mb-3">')
                 }}
               />
             </div>
             
             {/* Key Takeaways */}
             {dynamicContent?.key_takeaways && (
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-lg border border-green-200 p-8">
+              <div className="arcade-dialog p-8">
                 <div className="flex items-center mb-6">
-                  <div className="bg-green-500 rounded-full p-2 mr-4">
-                    <CheckCircle className="h-6 w-6 text-white" />
+                  <div className="bg-green-400 border-2 border-white p-2 mr-4">
+                    <CheckCircle className="h-6 w-6 text-black" />
                   </div>
-                  <h3 className="text-2xl font-bold text-green-800">Key Takeaways</h3>
+                  <h3 className="arcade-h2">KEY TAKEAWAYS</h3>
                 </div>
                 <div className="grid gap-4">
                   {dynamicContent.key_takeaways.map((takeaway: string, index: number) => (
-                    <div key={index} className="flex items-start bg-white rounded-lg p-4 shadow-sm border border-green-100">
-                      <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                        <CheckCircle className="h-4 w-4 text-green-600" />
+                    <div key={index} className="arcade-card arcade-card-cyan p-4">
+                      <div className="flex items-start">
+                        <div className="bg-green-400 border border-white p-1 mr-3 mt-1">
+                          <CheckCircle className="h-4 w-4 text-black" />
+                        </div>
+                        <p className="arcade-text arcade-text-yellow">{takeaway.toUpperCase()}</p>
                       </div>
-                      <p className="text-green-800 font-medium">{takeaway}</p>
                     </div>
                   ))}
                 </div>
@@ -220,34 +228,34 @@ export default function EnhancedLessonView() {
             
             {/* Case Study */}
             {dynamicContent?.case_study && (
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-lg border border-blue-200 p-8">
+              <div className="arcade-dialog p-8">
                 <div className="flex items-center mb-6">
-                  <div className="bg-blue-500 rounded-full p-2 mr-4">
-                    <Brain className="h-6 w-6 text-white" />
+                  <div className="bg-cyan-400 border-2 border-white p-2 mr-4">
+                    <Brain className="h-6 w-6 text-black" />
                   </div>
-                  <h3 className="text-2xl font-bold text-blue-800">Case Study</h3>
+                  <h3 className="arcade-h2">CASE STUDY</h3>
                 </div>
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-blue-100">
-                  <h4 className="text-xl font-semibold text-blue-800 mb-4">{dynamicContent.case_study.title}</h4>
-                  <p className="text-blue-700 leading-relaxed">{dynamicContent.case_study.text}</p>
+                <div className="arcade-card arcade-card-magenta p-6">
+                  <h4 className="arcade-h3 mb-4">{dynamicContent.case_study.title.toUpperCase()}</h4>
+                  <p className="arcade-text text-white leading-relaxed">{dynamicContent.case_study.text}</p>
                 </div>
               </div>
             )}
             
             {/* FAQs */}
             {dynamicContent?.faqs && dynamicContent.faqs.length > 0 && (
-              <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-xl shadow-lg border border-purple-200 p-8">
+              <div className="arcade-dialog p-8">
                 <div className="flex items-center mb-6">
-                  <div className="bg-purple-500 rounded-full p-2 mr-4">
-                    <Target className="h-6 w-6 text-white" />
+                  <div className="bg-yellow-400 border-2 border-white p-2 mr-4">
+                    <Target className="h-6 w-6 text-black" />
                   </div>
-                  <h3 className="text-2xl font-bold text-purple-800">Frequently Asked Questions</h3>
+                  <h3 className="arcade-h2">FREQUENTLY ASKED QUESTIONS</h3>
                 </div>
                 <div className="space-y-4">
                   {dynamicContent.faqs.map((faq: any, index: number) => (
-                    <div key={index} className="bg-white rounded-lg p-6 shadow-sm border border-purple-100">
-                      <h4 className="text-lg font-semibold text-purple-800 mb-3">{faq.q}</h4>
-                      <p className="text-purple-700 leading-relaxed">{faq.a}</p>
+                    <div key={index} className="arcade-card arcade-card-yellow p-6">
+                      <h4 className="arcade-h3 mb-3">{faq.q.toUpperCase()}</h4>
+                      <p className="arcade-text text-white leading-relaxed">{faq.a}</p>
                     </div>
                   ))}
                 </div>
@@ -260,89 +268,97 @@ export default function EnhancedLessonView() {
       {/* Action Buttons */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Take Quiz */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <div className="arcade-card p-6">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mb-4">
-              <Brain className="h-6 w-6 text-purple-600" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-magenta-400 border-2 border-white mb-4">
+              <Brain className="h-6 w-6 text-black" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Take Quiz</h3>
-            <p className="text-gray-600 text-sm mb-4">Test your knowledge with 10 questions</p>
+            <h3 className="arcade-text arcade-text-neon-cyan mb-2 text-sm">TAKE QUIZ</h3>
+            <p className="arcade-text arcade-text-neon-yellow text-xs mb-4">TEST KNOWLEDGE - 10 QUESTIONS</p>
             <div className="flex items-center justify-center gap-2 mb-4">
               {quizCompleted ? (
-                <div className="flex items-center text-green-600">
-                  <CheckCircle className="h-4 w-4 mr-1" />
-                  <span className="text-sm font-medium">Completed</span>
+                <div className="status-complete px-2 py-1 text-xs">
+                  <CheckCircle className="h-3 w-3 inline mr-1" />
+                  COMPLETE
                 </div>
               ) : (
-                <span className="text-sm text-gray-500">Not started</span>
+                <div className="status-incomplete px-2 py-1 text-xs">
+                  NOT STARTED
+                </div>
               )}
             </div>
             <button
               onClick={() => navigate(`/quiz/${moduleId}/${lessonId}`)}
-              className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-purple-700 transition-colors"
+              className="arcade-btn-quiz w-full py-2 px-4 arcade-text text-xs"
             >
-              {quizCompleted ? 'Retake Quiz' : 'Start Quiz'}
+              {quizCompleted ? 'RETAKE QUIZ' : 'START QUIZ'}
             </button>
           </div>
         </div>
 
         {/* Eco Challenge */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <div className="arcade-card arcade-card-green p-6">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
-              <Target className="h-6 w-6 text-green-600" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-green-400 border-2 border-white mb-4">
+              <Target className="h-6 w-6 text-black" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Eco Challenge</h3>
-            <p className="text-gray-600 text-sm mb-4">Complete real-world environmental action</p>
+            <h3 className="arcade-text arcade-text-neon-cyan mb-2 text-sm">ECO MISSION</h3>
+            <p className="arcade-text arcade-text-neon-yellow text-xs mb-4">REAL-WORLD ACTION REQUIRED</p>
             <div className="flex items-center justify-center gap-2 mb-4">
               {challengeCompleted ? (
-                <div className="flex items-center text-green-600">
-                  <CheckCircle className="h-4 w-4 mr-1" />
-                  <span className="text-sm font-medium">Completed</span>
+                <div className="status-complete px-2 py-1 text-xs">
+                  <CheckCircle className="h-3 w-3 inline mr-1" />
+                  COMPLETE
                 </div>
               ) : (
-                <span className="text-sm text-gray-500">Not started</span>
+                <div className="status-incomplete px-2 py-1 text-xs">
+                  NOT STARTED
+                </div>
               )}
             </div>
             <button
               onClick={() => navigate(`/eco-challenge/${lessonId}`)}
-              className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors"
+              className="arcade-btn-mission w-full py-2 px-4 arcade-text text-xs"
             >
-              {challengeCompleted ? 'View Challenge' : 'Start Challenge'}
+              {challengeCompleted ? 'VIEW MISSION' : 'START MISSION'}
             </button>
           </div>
         </div>
 
         {/* Mark Complete */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <div className="arcade-card p-6">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-4">
-              <CheckCircle className="h-6 w-6 text-blue-600" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-cyan-400 border-2 border-white mb-4">
+              <CheckCircle className="h-6 w-6 text-black" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Complete Lesson</h3>
-            <p className="text-gray-600 text-sm mb-4">Finish quiz and challenge to complete</p>
+            <h3 className="arcade-text arcade-text-neon-cyan mb-2 text-sm">MISSION STATUS</h3>
+            <p className="arcade-text arcade-text-neon-yellow text-xs mb-4">COMPLETE ALL REQUIREMENTS</p>
             <div className="mb-4">
-              <div className="text-xs text-gray-500 mb-1">Requirements:</div>
+              <div className="arcade-text arcade-text-neon-cyan text-xs mb-2">REQUIREMENTS:</div>
               <div className="space-y-1">
-                <div className={`flex items-center text-xs ${quizCompleted ? 'text-green-600' : 'text-gray-400'}`}>
+                <div className={`flex items-center arcade-text text-xs ${
+                  quizCompleted ? 'arcade-text-neon-green' : 'arcade-text-neon-red'
+                }`}>
                   <CheckCircle className="h-3 w-3 mr-1" />
-                  Quiz completed
+                  QUIZ COMPLETE
                 </div>
-                <div className={`flex items-center text-xs ${challengeCompleted ? 'text-green-600' : 'text-gray-400'}`}>
+                <div className={`flex items-center arcade-text text-xs ${
+                  challengeCompleted ? 'arcade-text-neon-green' : 'arcade-text-neon-red'
+                }`}>
                   <CheckCircle className="h-3 w-3 mr-1" />
-                  Challenge completed
+                  MISSION COMPLETE
                 </div>
               </div>
             </div>
             <button
               disabled={!isLessonComplete}
-              className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
+              className={`w-full py-2 px-4 arcade-text text-xs ${
                 isLessonComplete 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  ? 'arcade-btn-status' 
+                  : 'status-incomplete cursor-not-allowed'
               }`}
             >
-              {isLessonComplete ? 'Lesson Complete!' : 'Complete Requirements'}
+              {isLessonComplete ? 'MISSION COMPLETE!' : 'INCOMPLETE'}
             </button>
           </div>
         </div>

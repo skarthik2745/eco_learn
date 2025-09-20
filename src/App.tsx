@@ -14,6 +14,7 @@ import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
+import Footer from './components/Footer';
 
 function ProtectedRoute({ children, role }: { children: React.ReactNode; role?: 'student' | 'teacher' }) {
   const { user, loading } = useAuth();
@@ -29,7 +30,7 @@ function AppRoutes() {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+    <div className="min-h-screen bg-black pixel-bg">
       {user && <Navbar />}
       <Routes>
         <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/dashboard" />} />
@@ -107,6 +108,7 @@ function AppRoutes() {
         />
         <Route path="/" element={<Navigate to="/dashboard" />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

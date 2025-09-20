@@ -25,16 +25,16 @@ export default function Navbar() {
   const navItems = user?.role === 'student' ? studentNav : teacherNav;
 
   return (
-    <nav className="bg-white shadow-sm border-b border-green-100">
+    <nav className="bg-black border-b-4 border-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/dashboard" className="flex items-center space-x-2 text-green-600 hover:text-green-700 transition-colors">
-              <div className="bg-green-100 p-2 rounded-lg">
-                <Leaf className="w-6 h-6" />
+            <Link to="/dashboard" className="flex items-center space-x-3 retro-text-cyan hover:text-yellow-400 transition-colors">
+              <div className="bg-cyan-400 p-2 border-2 border-white">
+                <Leaf className="w-6 h-6 text-black" />
               </div>
-              <span className="text-xl font-bold">EcoLearn</span>
+              <span className="retro-h3">ECOLEARN</span>
             </Link>
           </div>
 
@@ -44,14 +44,14 @@ export default function Navbar() {
               <Link
                 key={path}
                 to={path}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`flex items-center space-x-2 px-4 py-2 retro-text nav-hover transition-colors ${
                   isActive(path)
-                    ? 'bg-green-100 text-green-700'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    ? 'retro-text-yellow bg-gray-900 border-2 border-yellow-400'
+                    : 'retro-text-cyan hover:retro-text-yellow'
                 }`}
               >
                 <Icon className="w-4 h-4" />
-                <span className="hidden sm:block">{label}</span>
+                <span className="hidden sm:block text-xs uppercase">{label}</span>
               </Link>
             ))}
           </div>
@@ -59,30 +59,32 @@ export default function Navbar() {
           {/* User Info & Points */}
           <div className="flex items-center space-x-4">
             {user?.role === 'student' && (
-              <div className="flex items-center space-x-2 bg-green-50 px-3 py-1 rounded-full">
-                <Trophy className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-green-700">
-                  {userProgress.points} pts
-                </span>
-                <span className="text-xs text-green-500">
-                  Level {userProgress.level}
-                </span>
+              <div className="retro-card px-3 py-1">
+                <div className="flex items-center space-x-2">
+                  <Trophy className="w-4 h-4 text-yellow-400" />
+                  <span className="retro-text retro-text-cyan">
+                    {userProgress.points} PTS
+                  </span>
+                  <span className="retro-text retro-text-green">
+                    LV{userProgress.level}
+                  </span>
+                </div>
               </div>
             )}
             
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-green-600">
+              <div className="w-8 h-8 bg-magenta-500 border-2 border-white flex items-center justify-center">
+                <span className="retro-text text-white">
                   {user?.name.charAt(0)}
                 </span>
               </div>
-              <span className="hidden md:block text-sm text-gray-700">{user?.name}</span>
+              <span className="hidden md:block retro-text retro-text-cyan text-xs">{user?.name.toUpperCase()}</span>
             </div>
 
             <button
               onClick={logout}
-              className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
-              title="Logout"
+              className="retro-btn retro-btn-red"
+              title="LOGOUT"
             >
               <LogOut className="w-4 h-4" />
             </button>
@@ -91,4 +93,5 @@ export default function Navbar() {
       </div>
     </nav>
   );
+
 }

@@ -1,98 +1,124 @@
 import React from 'react';
-import { Award, Download, Share2 } from 'lucide-react';
+import { Trophy, Star } from 'lucide-react';
 
 interface CertificateProps {
   studentName: string;
-  moduleName: string;
+  lessonTitle: string;
+  moduleTitle: string;
   completionDate: string;
-  points: number;
-  onDownload?: () => void;
-  onShare?: () => void;
+  badgeIcon: string;
 }
 
-export default function CertificateGenerator({ 
-  studentName, 
-  moduleName, 
-  completionDate, 
-  points,
-  onDownload,
-  onShare 
-}: CertificateProps) {
+export default function Certificate({ studentName, lessonTitle, moduleTitle, completionDate, badgeIcon }: CertificateProps) {
   return (
-    <div className="bg-white border-4 border-green-600 rounded-lg p-8 max-w-2xl mx-auto">
+    <div className="certificate p-8 max-w-2xl mx-auto relative">
+      {/* Decorative Corner Stars */}
+      <div className="absolute top-4 left-4">
+        <Star className="w-6 h-6 text-yellow-400 animate-pulse" />
+      </div>
+      <div className="absolute top-4 right-4">
+        <Star className="w-6 h-6 text-cyan-400 animate-pulse" />
+      </div>
+      <div className="absolute bottom-4 left-4">
+        <Star className="w-6 h-6 text-magenta-400 animate-pulse" />
+      </div>
+      <div className="absolute bottom-4 right-4">
+        <Star className="w-6 h-6 text-green-400 animate-pulse" />
+      </div>
+
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-          <Award className="h-8 w-8 text-green-600" />
+        <h1 className="certificate-title text-2xl mb-4">
+          ECO ARCADE ACHIEVEMENT
+        </h1>
+        <h2 className="certificate-title text-xl">
+          CERTIFICATE OF COMPLETION
+        </h2>
+      </div>
+
+      {/* Badge Icon */}
+      <div className="text-center mb-6">
+        <div className="inline-block text-6xl mb-4 animate-pulse">
+          {badgeIcon}
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Certificate of Completion</h1>
-        <div className="w-24 h-1 bg-green-600 mx-auto"></div>
       </div>
 
       {/* Content */}
-      <div className="text-center space-y-6">
-        <p className="text-lg text-gray-700">This is to certify that</p>
-        
-        <h2 className="text-4xl font-bold text-green-600 border-b-2 border-green-200 pb-2 inline-block">
-          {studentName}
-        </h2>
-        
-        <p className="text-lg text-gray-700">
-          has successfully completed the
+      <div className="text-center mb-8">
+        <p className="arcade-text arcade-text-neon-yellow mb-4 text-sm">
+          THIS CERTIFIES THAT
         </p>
-        
-        <h3 className="text-2xl font-semibold text-gray-900">
-          {moduleName} Module
+        <h3 className="arcade-text arcade-text-neon-green text-xl mb-6" style={{textShadow: '2px 2px 0px #ff004d'}}>
+          {studentName.toUpperCase()}
         </h3>
-        
-        <p className="text-lg text-gray-700">
-          in the EcoLearn Sustainability Education Program
+        <p className="arcade-text text-white mb-2 text-xs">
+          HAS SUCCESSFULLY COMPLETED ALL REQUIREMENTS FOR
         </p>
+        <h4 className="arcade-text arcade-text-neon-cyan mb-2 text-lg" style={{textShadow: '1px 1px 0px #ffcc00'}}>
+          {lessonTitle.toUpperCase()}
+        </h4>
+        <p className="arcade-text arcade-text-neon-yellow text-xs mb-6">
+          FROM MODULE: {moduleTitle.toUpperCase()}
+        </p>
+        <p className="arcade-text text-white text-xs mb-4">
+          INCLUDING LESSON CONTENT, QUIZ MASTERY, AND ECO MISSION COMPLETION
+        </p>
+      </div>
+
+      {/* Seal and Date */}
+      <div className="flex justify-between items-end">
+        <div className="text-left">
+          <p className="arcade-text arcade-text-neon-yellow text-xs mb-2">
+            COMPLETION DATE:
+          </p>
+          <p className="arcade-text text-white text-xs">
+            {completionDate.toUpperCase()}
+          </p>
+        </div>
         
-        <div className="flex justify-center items-center gap-8 py-6">
-          <div className="text-center">
-            <p className="text-sm text-gray-600">Completion Date</p>
-            <p className="text-lg font-semibold text-gray-900">{completionDate}</p>
-          </div>
-          <div className="text-center">
-            <p className="text-sm text-gray-600">EcoPoints Earned</p>
-            <p className="text-lg font-semibold text-green-600">{points}</p>
-          </div>
+        <div className="certificate-seal">
+          <Trophy className="text-white" size={24} />
+        </div>
+        
+        <div className="text-right">
+          <p className="arcade-text arcade-text-neon-yellow text-xs mb-2">
+            ECOLEARN ARCADE
+          </p>
+          <p className="arcade-text text-white text-xs">
+            CERTIFIED ACHIEVEMENT
+          </p>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="mt-8 pt-6 border-t border-gray-200">
-        <div className="flex justify-between items-center">
-          <div className="text-left">
-            <p className="text-sm text-gray-600">Certified by</p>
-            <p className="font-semibold text-gray-900">EcoLearn Platform</p>
-          </div>
-          <div className="text-right">
-            <div className="w-32 h-8 bg-green-600 rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm">🌱 ECOLEARN</span>
-            </div>
-          </div>
+      <div className="text-center mt-8">
+        <p className="arcade-text arcade-text-neon-green blink text-sm">
+          LEVEL UP! MISSION COMPLETE!
+        </p>
+        <div className="flex justify-center space-x-2 mt-4">
+          <Star className="w-4 h-4 text-yellow-400 animate-pulse" />
+          <Star className="w-4 h-4 text-cyan-400 animate-pulse" style={{animationDelay: '0.2s'}} />
+          <Star className="w-4 h-4 text-magenta-400 animate-pulse" style={{animationDelay: '0.4s'}} />
         </div>
-      </div>
-
-      {/* Actions */}
-      <div className="flex justify-center gap-4 mt-8">
-        <button
-          onClick={onDownload}
-          className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
-        >
-          <Download className="h-4 w-4" />
-          Download
-        </button>
-        <button
-          onClick={onShare}
-          className="flex items-center gap-2 px-6 py-3 border border-green-600 text-green-600 rounded-lg font-medium hover:bg-green-50 transition-colors"
-        >
-          <Share2 className="h-4 w-4" />
-          Share
-        </button>
       </div>
     </div>
   );
+}
+
+export function generateCertificate(studentName: string, lessonTitle: string, moduleTitle: string, badgeIcon: string = '🏆') {
+  const completionDate = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  return {
+    id: `cert_${Date.now()}`,
+    studentName,
+    lessonTitle,
+    moduleTitle,
+    completionDate,
+    badgeIcon,
+    issuedBy: 'EcoLearn Arcade System',
+    certificateNumber: `ECO-${Date.now().toString().slice(-6)}`
+  };
 }

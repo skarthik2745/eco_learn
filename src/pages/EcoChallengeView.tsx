@@ -101,21 +101,21 @@ export default function EcoChallengeView() {
     <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <Link to={`/lesson/${lesson.id.split('-')[0]}/${lessonId}`} className="inline-flex items-center text-green-600 hover:text-green-700 mb-4">
+        <Link to={`/lesson/${lesson.id.split('-')[0]}/${lessonId}`} className="inline-flex items-center arcade-text arcade-text-neon-green hover:arcade-text-neon-yellow mb-4">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Lesson
+          BACK TO LESSON
         </Link>
         
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+        <div className="arcade-dialog p-6">
           <div className="flex items-start gap-4">
-            <div className="p-4 bg-green-100 rounded-xl">
-              <Target className="h-8 w-8 text-green-600" />
+            <div className="p-4 bg-green-400 border-4 border-white">
+              <Target className="h-8 w-8 text-black" />
             </div>
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Eco Challenges</h1>
-              <p className="text-gray-600 mb-4">Complete real-world environmental actions for {lesson.title}</p>
-              <div className="text-sm text-gray-500">
-                Choose one of the three action-based challenges below to complete
+              <h1 className="retro-h1 mb-2">ECO MISSIONS</h1>
+              <p className="arcade-text arcade-text-neon-cyan mb-4">COMPLETE REAL-WORLD ENVIRONMENTAL ACTIONS FOR {lesson.title.toUpperCase()}</p>
+              <div className="arcade-text arcade-text-neon-yellow text-xs">
+                CHOOSE ONE OF THE THREE ACTION-BASED CHALLENGES BELOW TO COMPLETE
               </div>
             </div>
           </div>
@@ -126,15 +126,15 @@ export default function EcoChallengeView() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Challenge Selection */}
           <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-gray-900">Available Challenges</h2>
+            <h2 className="arcade-text arcade-text-neon-pink text-lg" style={{textShadow: '2px 2px 0px #ffcc00'}}>AVAILABLE MISSIONS</h2>
             
             {challenges.map((challenge, index) => (
               <div 
                 key={challenge.id}
-                className={`border-2 rounded-xl p-6 cursor-pointer transition-all ${
+                className={`eco-mission-card p-6 cursor-pointer ${
                   selectedChallenge === index 
-                    ? 'border-green-500 bg-green-50' 
-                    : 'border-gray-200 hover:border-green-300'
+                    ? 'active' 
+                    : ''
                 }`}
                 onClick={() => setSelectedChallenge(index)}
               >
@@ -149,7 +149,7 @@ export default function EcoChallengeView() {
                         <CheckCircle className="h-6 w-6 text-white" />
                       )}
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900">{challenge.title}</h3>
+                    <h3 className="arcade-text arcade-text-neon-yellow text-sm">{challenge.title.toUpperCase()}</h3>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1 ${getDifficultyColor(challenge.difficulty)}`}>
@@ -159,24 +159,24 @@ export default function EcoChallengeView() {
                   </div>
                 </div>
 
-                <p className="text-gray-700 mb-4">{challenge.description}</p>
+                <p className="arcade-text arcade-text-neon-cyan mb-4 text-xs">{challenge.description}</p>
 
-                <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                <div className="grid grid-cols-2 gap-4 arcade-text arcade-text-neon-green text-xs">
                   <div className="flex items-center">
-                    <Clock className="h-4 w-4 mr-2" />
-                    {challenge.timeframe || '1-7 days'}
+                    <Clock className="h-4 w-4 mr-2 text-cyan-400" />
+                    {(challenge.timeframe || '1-7 DAYS').toUpperCase()}
                   </div>
                   <div className="flex items-center">
-                    <Award className="h-4 w-4 mr-2" />
-                    {challenge.points} points
+                    <Award className="h-4 w-4 mr-2 text-yellow-400" />
+                    {challenge.points} POINTS
                   </div>
                   <div className="flex items-center">
-                    <Camera className="h-4 w-4 mr-2" />
-                    {challenge.proofType === 'multiple' ? 'Photo/Video' : 'Photo'} proof
+                    <Camera className="h-4 w-4 mr-2 text-magenta-400" />
+                    {(challenge.proofType === 'multiple' ? 'PHOTO/VIDEO' : 'PHOTO')} PROOF
                   </div>
                   <div className="flex items-center">
-                    <Target className="h-4 w-4 mr-2" />
-                    {challenge.category || 'action'}
+                    <Target className="h-4 w-4 mr-2 text-green-400" />
+                    {(challenge.category || 'ACTION').toUpperCase()}
                   </div>
                 </div>
               </div>
@@ -185,46 +185,46 @@ export default function EcoChallengeView() {
 
           {/* Challenge Details & Submission */}
           <div className="space-y-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Challenge Instructions</h3>
+            <div className="arcade-dialog p-6">
+              <h3 className="arcade-text arcade-text-neon-pink text-lg mb-4" style={{textShadow: '2px 2px 0px #ffcc00'}}>MISSION BRIEFING</h3>
               
               <div className="space-y-3 mb-6">
                 {currentChallenge.instructions.map((instruction, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-medium text-green-600">{index + 1}</span>
+                    <div className="flex-shrink-0 w-6 h-6 bg-green-400 border-2 border-white flex items-center justify-center">
+                      <span className="arcade-text text-black text-xs">{index + 1}</span>
                     </div>
-                    <p className="text-gray-700">{instruction}</p>
+                    <p className="arcade-text arcade-text-neon-cyan text-xs">{instruction.toUpperCase()}</p>
                   </div>
                 ))}
               </div>
 
               {/* Materials Required */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Materials Required
+                <label className="arcade-text arcade-text-neon-yellow text-xs mb-2 block">
+                  MATERIALS REQUIRED
                 </label>
-                <div className="bg-blue-50 rounded-lg p-3">
-                  <ul className="text-sm text-blue-800 space-y-1">
+                <div className="arcade-card arcade-card-cyan p-3">
+                  <ul className="arcade-text arcade-text-neon-green text-xs space-y-1">
                     {currentChallenge.materials.map((material, index) => (
                       <li key={index} className="flex items-center">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                        {material}
+                        <span className="w-2 h-2 bg-green-400 mr-2"></span>
+                        {material.toUpperCase()}
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="border-t pt-6">
-                <h4 className="font-medium text-gray-900 mb-4">Submit Your Proof</h4>
+              <div className="border-t-4 border-cyan-400 pt-6">
+                <h4 className="arcade-text arcade-text-neon-pink text-sm mb-4">SUBMIT YOUR PROOF</h4>
                 
                 {/* File Upload */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Upload Evidence (Photos/Videos) *
+                  <label className="arcade-text arcade-text-neon-yellow text-xs mb-2 block">
+                    UPLOAD EVIDENCE (PHOTOS/VIDEOS) *
                   </label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-green-400 transition-colors">
+                  <div className="arcade-card arcade-card-magenta p-6 text-center hover:arcade-card-green transition-colors cursor-pointer">
                     <input
                       type="file"
                       multiple
@@ -234,18 +234,18 @@ export default function EcoChallengeView() {
                       id="file-upload"
                     />
                     <label htmlFor="file-upload" className="cursor-pointer">
-                      <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                      <p className="text-gray-600">Click to upload files</p>
-                      <p className="text-sm text-gray-500">Images, Videos up to 10MB each</p>
+                      <Upload className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
+                      <p className="arcade-text arcade-text-neon-cyan text-xs">CLICK TO UPLOAD FILES</p>
+                      <p className="arcade-text arcade-text-neon-yellow text-xs">IMAGES, VIDEOS UP TO 10MB EACH</p>
                     </label>
                   </div>
                   
                   {uploadedFiles.length > 0 && (
                     <div className="mt-4 space-y-2">
                       {uploadedFiles.map((file, index) => (
-                        <div key={index} className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 p-2 rounded">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                          {file.name}
+                        <div key={index} className="arcade-card arcade-card-green p-2 flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-green-400" />
+                          <span className="arcade-text arcade-text-neon-green text-xs">{file.name.toUpperCase()}</span>
                         </div>
                       ))}
                     </div>
@@ -254,22 +254,22 @@ export default function EcoChallengeView() {
 
                 {/* Example Display */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    💡 Example Ideas
+                  <label className="arcade-text arcade-text-neon-yellow text-xs mb-2 block">
+                    💡 EXAMPLE IDEAS
                   </label>
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <p className="text-blue-800 text-sm font-medium mb-2">How other students completed this:</p>
-                    <div className="text-blue-700 text-sm space-y-3">
+                  <div className="arcade-card arcade-card-yellow p-4">
+                    <p className="arcade-text arcade-text-neon-cyan text-xs mb-2">HOW OTHER STUDENTS COMPLETED THIS:</p>
+                    <div className="arcade-text arcade-text-neon-green text-xs space-y-3">
                       <div>
-                        <p className="text-blue-800 font-medium mb-2">💡 Example Ideas:</p>
-                        <ul className="space-y-1 text-blue-600">
+                        <p className="arcade-text arcade-text-neon-yellow text-xs mb-2">💡 EXAMPLE IDEAS:</p>
+                        <ul className="space-y-1">
                           {currentChallenge?.exampleIdeas?.map((idea, index) => (
-                            <li key={index}>• {idea}</li>
+                            <li key={index}>• {idea.toUpperCase()}</li>
                           )) || [
-                            'Start small and document your progress with photos',
-                            'Involve friends or family members to make it more fun',
-                            'Measure the impact of your actions with simple tools',
-                            'Share your experience to inspire others'
+                            'START SMALL AND DOCUMENT YOUR PROGRESS WITH PHOTOS',
+                            'INVOLVE FRIENDS OR FAMILY MEMBERS TO MAKE IT MORE FUN',
+                            'MEASURE THE IMPACT OF YOUR ACTIONS WITH SIMPLE TOOLS',
+                            'SHARE YOUR EXPERIENCE TO INSPIRE OTHERS'
                           ].map((idea, index) => (
                             <li key={index}>• {idea}</li>
                           ))}
@@ -277,9 +277,9 @@ export default function EcoChallengeView() {
                       </div>
                       
                       {currentChallenge?.example && (
-                        <div className="pt-3 border-t border-blue-200">
-                          <p className="text-blue-800 font-medium mb-2">Success Story:</p>
-                          <p className="text-blue-600">{currentChallenge.example}</p>
+                        <div className="pt-3 border-t-2 border-cyan-400">
+                          <p className="arcade-text arcade-text-neon-yellow text-xs mb-2">SUCCESS STORY:</p>
+                          <p className="arcade-text arcade-text-neon-cyan text-xs">{currentChallenge.example.toUpperCase()}</p>
                         </div>
                       )}
                     </div>
@@ -288,46 +288,46 @@ export default function EcoChallengeView() {
 
                 {/* Reflection */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    What did you learn? (50+ words) *
+                  <label className="arcade-text arcade-text-neon-yellow text-xs mb-2 block">
+                    WHAT DID YOU LEARN? (50+ WORDS) *
                   </label>
                   <textarea
                     value={reflection}
                     onChange={(e) => setReflection(e.target.value)}
                     rows={4}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="Describe what you did, what you learned, and how it impacted you..."
+                    className="retro-input w-full"
+                    placeholder="DESCRIBE WHAT YOU DID, WHAT YOU LEARNED, AND HOW IT IMPACTED YOU..."
                   />
-                  <div className="mt-1 text-sm text-gray-500">
-                    {reflection.length} characters (minimum 50 required)
+                  <div className="mt-1 arcade-text arcade-text-neon-cyan text-xs">
+                    {reflection.length} CHARACTERS (MINIMUM 50 REQUIRED)
                   </div>
                 </div>
 
                 {/* Optional Location */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      <MapPin className="h-4 w-4 inline mr-1" />
-                      Location (Optional)
+                    <label className="arcade-text arcade-text-neon-yellow text-xs mb-2 block">
+                      <MapPin className="h-4 w-4 inline mr-1 text-cyan-400" />
+                      LOCATION (OPTIONAL)
                     </label>
                     <input
                       type="text"
                       value={gpsLocation}
                       onChange={(e) => setGpsLocation(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                      placeholder="Where did you complete this?"
+                      className="retro-input w-full"
+                      placeholder="WHERE DID YOU COMPLETE THIS?"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      <Calendar className="h-4 w-4 inline mr-1" />
-                      Date Completed
+                    <label className="arcade-text arcade-text-neon-yellow text-xs mb-2 block">
+                      <Calendar className="h-4 w-4 inline mr-1 text-magenta-400" />
+                      DATE COMPLETED
                     </label>
                     <input
                       type="date"
                       value={dateStamp}
                       onChange={(e) => setDateStamp(e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      className="retro-input w-full"
                     />
                   </div>
                 </div>
@@ -335,9 +335,9 @@ export default function EcoChallengeView() {
                 <button
                   onClick={handleSubmit}
                   disabled={reflection.length < 50 || uploadedFiles.length === 0}
-                  className="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full retro-btn retro-btn-red arcade-text text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Submit Challenge (+{currentChallenge.points} EcoPoints)
+                  SUBMIT MISSION (+{currentChallenge.points} PTS)
                 </button>
               </div>
             </div>
@@ -345,34 +345,34 @@ export default function EcoChallengeView() {
         </div>
       ) : (
         /* Success State */
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-            <CheckCircle className="h-8 w-8 text-green-600" />
+        <div className="mission-result p-8 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-400 border-4 border-white mb-6">
+            <CheckCircle className="h-8 w-8 text-black" />
           </div>
           
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Challenge Completed!</h2>
-          <p className="text-gray-600 mb-6">
-            Congratulations! You've earned {currentChallenge.points} EcoPoints for completing "{currentChallenge.title}".
+          <h2 className="arcade-text arcade-text-neon-green text-2xl mb-4">MISSION COMPLETE!</h2>
+          <p className="arcade-text arcade-text-neon-cyan mb-6">
+            SUCCESS! YOU EARNED {currentChallenge.points} ECOPOINTS FOR "{currentChallenge.title.toUpperCase()}".
           </p>
           
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <p className="text-green-800 font-medium">
-              +{currentChallenge.points} EcoPoints added to your account!
+          <div className="eco-mission-card p-4 mb-6">
+            <p className="arcade-text arcade-text-neon-green">
+              +{currentChallenge.points} ECOPOINTS ADDED TO ACCOUNT!
             </p>
           </div>
 
           <div className="flex justify-center space-x-4">
             <Link
               to={`/lesson/${lesson.id.split('-')[0]}/${lessonId}`}
-              className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              className="arcade-btn-status px-4 py-2 arcade-text text-xs"
             >
-              Back to Lesson
+              BACK TO MISSION
             </Link>
             <Link
               to="/dashboard"
-              className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+              className="arcade-btn-mission px-4 py-2 arcade-text text-xs"
             >
-              Continue Learning
+              CONTINUE
             </Link>
           </div>
         </div>

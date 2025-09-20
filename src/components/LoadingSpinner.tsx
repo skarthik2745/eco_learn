@@ -14,13 +14,14 @@ export default function LoadingSpinner({ size = 'md', text = 'Loading...' }: Loa
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      <div className="bg-white p-8 rounded-lg shadow-md">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black starfield-bg">
+      <div className="arcade-dialog p-8">
         <div className="flex flex-col items-center space-y-4">
-          <Loader2 className={`${sizeClasses[size]} animate-spin text-green-600`} />
-          <p className="text-gray-600">{text}</p>
+          <Loader2 className={`${sizeClasses[size]} animate-spin text-cyan-400`} />
+          <p className="arcade-text arcade-text-yellow">{text.toUpperCase()}</p>
         </div>
       </div>
     </div>
   );
+
 }
