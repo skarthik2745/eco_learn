@@ -10,6 +10,7 @@ interface Badge {
   earnedDate?: Date;
 }
 
+
 interface UserProgress {
   userId: string;
   points: number;
